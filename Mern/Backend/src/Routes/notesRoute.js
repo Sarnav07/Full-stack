@@ -5,6 +5,7 @@ import {createANote, deleteANote, getAllNodes, updateANote} from "../Controllers
 const router = express.Router();
 
 router.get("/",getAllNodes);
+router.get("/:id",getNoteById);
 router.post("/",createANote);
 router.put("/:id",updateANote);
 router.delete("/:id",deleteANote);
