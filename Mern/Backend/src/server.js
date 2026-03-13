@@ -3,6 +3,7 @@ import express from "express";
 import notesRoutes from "./Routes/notesRoute.js"
 import {connectDB} from "./config/db.js";
 import dotenv from "dotenv";
+import rateLimiter from "./middleWare/rateLimiter.js"
 
 dotenv.config();
 
@@ -11,14 +12,20 @@ console.log(process.env.MONGO_URI)
 const app= express();
 const PORT= process.env.PORT || 5001;
 
-connectDB();
-
 app.use(express.json()); //middleware
+app.use(rateLimiter);
 
 app.use("/api/notes",notesRoutes);
 
-app.listen(PORT, ()=> {
-    console.log("Server started on port",PORT);
+app.use((req,res,next)=> {
+    console.log(`Req Method is ${req.method} & Req URL is ${req.url}`);
+    next();
+})
+
+connectDB().then(() => {
+    app.listen(PORT, ()=> {
+        console.log("Server started on port",PORT);
+    });
 });
 
 

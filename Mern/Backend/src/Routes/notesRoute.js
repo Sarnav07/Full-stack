@@ -1,6 +1,6 @@
 import express from "express";
 
-import {createANote, deleteANote, getAllNodes, updateANote} from "../Controllers/nodeControllers.js";
+import {createANote, deleteANote, getAllNodes,getNoteById, updateANote} from "../Controllers/nodeControllers.js";
 
 const router = express.Router();
 

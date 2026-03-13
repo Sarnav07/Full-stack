@@ -28,3 +28,7 @@ export const getResourcesById = async (req,res) => {
         res.status(500).json({message:"can't fetch the data",error});
     }
 };
+
+export const createResource = async (req,res) => {
+    
+}
